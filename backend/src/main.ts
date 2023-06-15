@@ -1,6 +1,6 @@
 import { Express } from 'express';
 
-import { createApp, connectToDatabase, createServer } from './configs/index';
+import { createApp, connectToDatabase, createServer } from '~/configs';
 
 const server: Express = createApp();
 
