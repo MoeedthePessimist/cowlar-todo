@@ -1,10 +1,19 @@
 import { Todo } from '~/models';
+import { ITodo } from '~/types';
 
 import { formatDate } from '~/utils/format-date';
 
-const resolvers = {
+export const resolvers = {
   Query: {
-    todos: async () => {
+    getTodoById: async (_: unknown, { _id }: { _id: string }) => {
+      try {
+        return await Todo.findById(_id);
+      } catch (error) {
+        throw new Error('Error fetching todo');
+      }
+    },
+
+    getAllTodos: async () => {
       try {
         const todos = await Todo.find();
         return todos;
@@ -14,12 +23,12 @@ const resolvers = {
     },
   },
   Mutation: {
-    createTodo: async (_, { Task }) => {
+    createTodo: async (_: unknown, { task }: { task: string }) => {
       try {
         const newTodo = new Todo({
-          Task,
-          Completed: false,
-          CreationTime: new Date(),
+          task,
+          completed: false,
+          creationTime: new Date(),
         });
         const savedTodo = await newTodo.save();
         return savedTodo;
@@ -27,13 +36,29 @@ const resolvers = {
         throw new Error('Error creating todo');
       }
     },
-    updateTodo: async (_, { _id, Completed, CompletedTime }) => {
+    updateTodo: async (
+      _: ITodo,
+      {
+        _id,
+        completed,
+        completedTime,
+        task,
+      }: {
+        _id: string;
+        completed: boolean;
+        completedTime: Date;
+        task: string;
+      },
+    ) => {
       try {
         const updatedTodo = await Todo.findByIdAndUpdate(
           _id,
           {
-            Completed,
-            CompletedTime,
+            $set: {
+              task,
+              completed,
+              completedTime,
+            },
           },
           { new: true },
         );
@@ -42,7 +67,7 @@ const resolvers = {
         throw new Error('Error updating todo');
       }
     },
-    deleteTodo: async (_, { _id }) => {
+    deleteTodo: async (_: ITodo, { _id }: { _id: string }) => {
       try {
         const deletedTodo = await Todo.findByIdAndRemove(_id);
         return deletedTodo;
@@ -52,11 +77,11 @@ const resolvers = {
     },
   },
   Todo: {
-    CompletedTime: (parent) => {
-      return parent.Completed ? formatDate(parent.CompletedTime) : null;
+    completedTime: (parent: ITodo) => {
+      return parent.completed ? formatDate(parent.completedTime) : null;
     },
-    CreationTime: (parent) => {
-      return formatDate(parent.CreationTime);
+    createdAt: (parent: ITodo) => {
+      return formatDate(parent.createdAt);
     },
   },
 };

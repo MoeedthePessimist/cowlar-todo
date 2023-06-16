@@ -1,6 +1,6 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
 
-import { ITodo } from "types/todo.types";
+import { ITodo } from '~/types';
 
 const TodoSchema: Schema<ITodo> = new Schema({
   task: {
@@ -15,12 +15,12 @@ const TodoSchema: Schema<ITodo> = new Schema({
     type: Date,
     default: null,
   },
-  creationTime: {
+  createdAt: {
     type: Date,
     default: Date.now,
   },
 });
 
-const TodoModel = model<ITodo>("Todo", TodoSchema);
+const TodoModel = model<ITodo>('Todo', TodoSchema);
 
 export default TodoModel;

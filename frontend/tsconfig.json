@@ -13,6 +13,11 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "baseUrl": ".",
+    "rootDir": ".",
+    "paths": {
+      "~/*": ["src/*"]
+    },
 
     /* Linting */
     "strict": true,
