@@ -1,0 +1,50 @@
+@import '../../index.scss';
+
+.container {
+  display: flex;
+  background: $color-secondary;
+  padding: 0.5rem 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.filters-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.content-container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.task {
+  color: $color-text-secondary;
+  font-size: 1.2em;
+}
+
+.icons-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.icon-container {
+  cursor: pointer;
+}
+
+.icon-container:hover {
+  transform: scale(1.1);
+}
+
+@media screen and (min-width: 600px) {
+  .container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+  }
+}

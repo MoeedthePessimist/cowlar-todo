@@ -3,12 +3,14 @@ import styles from './styles.module.scss';
 import { filters, colors } from '~/constants';
 
 interface SideBarProps {
-  onPressOption: (type: string) => void;
+  onPressFilter: (type: string) => void;
 }
 
 interface FilterProps {
-  onPressOption: (type: string) => void;
+  onPressFilter?: (type: string) => void;
   filter: string;
+  customStyle?: React.CSSProperties;
+  isHoverable?: boolean;
 }
 
 type Letter = {
@@ -27,22 +29,28 @@ const letters: Letter[] = [
   { letter: 'T', color: colors[filters.urgent] },
 ];
 
-const Filter: React.FC<FilterProps> = ({ onPressOption, filter }) => {
+export const Filter: React.FC<FilterProps> = ({ onPressFilter, filter, customStyle, isHoverable = true }) => {
   return (
-    <div className={styles['filter']} onClick={() => onPressOption(filter)} style={{ backgroundColor: colors[filter] }}>
-      <div className={styles['tooltip']} style={{ backgroundColor: colors[filter] }}>
-        {filter}
-      </div>
+    <div
+      className={styles['filter']}
+      onClick={() => (onPressFilter ? onPressFilter(filter) : null)}
+      style={{ backgroundColor: colors[filter], ...customStyle }}
+    >
+      {isHoverable && (
+        <div className={styles['tooltip']} style={{ backgroundColor: colors[filter.toLowerCase()] }}>
+          {filter}
+        </div>
+      )}
     </div>
   );
 };
 
-const SideBar: React.FC<SideBarProps> = ({ onPressOption }) => {
+const SideBar: React.FC<SideBarProps> = ({ onPressFilter }) => {
   return (
     <div className={styles['container']}>
-      <Filter onPressOption={onPressOption} filter={filters.personal} />
-      <Filter onPressOption={onPressOption} filter={filters.urgent} />
-      <Filter onPressOption={onPressOption} filter={filters.work} />
+      <Filter onPressFilter={onPressFilter} filter={filters.personal} />
+      <Filter onPressFilter={onPressFilter} filter={filters.urgent} />
+      <Filter onPressFilter={onPressFilter} filter={filters.work} />
       <div className={styles['divider']}></div>
       <div className={styles['title-container']}>
         {letters.map((letter: Letter, index: number) => (

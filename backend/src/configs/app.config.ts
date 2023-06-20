@@ -73,5 +73,5 @@ export const createApp = () => {
 const connectGraphServer = async (server: Express) => {
   const graphServer = new ApolloServer({ typeDefs, resolvers });
   await graphServer.start();
-  graphServer.applyMiddleware({ app: server });
+  graphServer.applyMiddleware({ app: server, path: '/graphql' });
 };

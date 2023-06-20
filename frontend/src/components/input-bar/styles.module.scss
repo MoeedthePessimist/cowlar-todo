@@ -1,0 +1,79 @@
+@import '../../index.scss';
+.container {
+  display: flex;
+  background: $color-secondary;
+  padding: 0.5rem 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  flex-direction: column;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0.9;
+  // height: 100%;
+}
+
+.filter-container {
+  display: flex;
+  gap: 0.5rem;
+  flex: 0.07;
+}
+
+.input-container {
+  display: flex;
+  flex: 0.93;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.input {
+  width: 100%;
+  padding: 1rem 1rem;
+  border: none;
+  background: none;
+  outline: none;
+  color: $color-text-secondary;
+  font-weight: 500;
+}
+
+.control-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 0.1;
+}
+
+.control {
+  flex: 0.1;
+  border: none;
+  background: none;
+}
+
+.control:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+@media screen and (min-width: 600px) {
+  .container {
+    flex-direction: row;
+  }
+  .control-container {
+    justify-content: flex-end;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    flex-direction: row;
+  }
+
+  .input {
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
+  }
+}

@@ -1,16 +1,55 @@
 import React from 'react';
 import { ITodo } from '~/types/todo.types';
 
+import { ReactComponent as CheckIcon } from '~/assets/check_icon.svg';
+import { ReactComponent as UncheckIcon } from '~/assets/uncheck_icon.svg';
+import { ReactComponent as BinIcon } from '~/assets/bin_icon.svg';
+
 import styles from './styles.module.scss';
+import { Filter } from '../side-bar/side-bar';
 
 interface TodoCardProps {
   todo: ITodo;
-  isOptionsOpen: boolean;
-  onOptionsOpen: () => void;
 }
 
-const TodoCard: React.FC<TodoCardProps> = () => {
-  return <div className={styles['container']}>TodoCard</div>;
+const TodoCard: React.FC<TodoCardProps> = ({ todo }) => {
+  return (
+    <div className={styles['container']}>
+      <div className={styles['content-container']}>
+        <div className={styles['filters-container']}>
+          {todo.filters &&
+            todo.filters.length > 0 &&
+            todo.filters.map((filter: string, index: number) => (
+              <Filter
+                filter={filter}
+                key={index}
+                customStyle={{
+                  height: '12px',
+                  width: '12px',
+                }}
+                isHoverable={false}
+              />
+            ))}
+        </div>
+        <div className={styles['task-container']}>
+          <h6 className={styles['task']}>{todo.task}</h6>
+        </div>
+      </div>
+
+      <div className={styles['icons-container']}>
+        <div className={styles['icon-container']}>
+          {todo.completed ? (
+            <CheckIcon className={styles['icon']} width={20} height={20} />
+          ) : (
+            <UncheckIcon className={styles['icon']} width={20} height={20} />
+          )}
+        </div>
+        <div className={styles['icon-container']}>
+          <BinIcon className={styles['icon']} width={20} height={20} />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default TodoCard;

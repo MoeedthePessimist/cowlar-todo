@@ -7,18 +7,18 @@ export const typeDefs = gql`
     _id: ID!
     task: String!
     completed: Boolean!
-    completedTime: String!
+    completedTime: Date!
     createdAt: Date!
+    filters: [String!]!
   }
 
   type Query {
-    getTodoById(_id: ID!): Todo!
-    getAllTodos: [Todo!]!
+    getAllTodos(filters: [String!]!): [Todo!]!
   }
 
   type Mutation {
-    createTodo(Task: String!): Todo!
-    updateTodo(_id: ID!, completed: Boolean!, completedTime: String!, task: String!): Todo!
+    createTodo(task: String!, completed: Boolean!, completedTime: Date!, createdAt: Date, filters: [String!]): Todo!
+    updateTodo(_id: ID!, completed: Boolean!, completedTime: Date!): Todo!
     deleteTodo(_id: ID!): Todo!
   }
 `;

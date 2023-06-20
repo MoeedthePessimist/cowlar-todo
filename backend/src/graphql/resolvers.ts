@@ -5,17 +5,16 @@ import { formatDate } from '~/utils/format-date';
 
 export const resolvers = {
   Query: {
-    getTodoById: async (_: unknown, { _id }: { _id: string }) => {
+    getAllTodos: async (_: ITodo, { filters }: { filters: string[] }) => {
       try {
-        return await Todo.findById(_id);
-      } catch (error) {
-        throw new Error('Error fetching todo');
-      }
-    },
-
-    getAllTodos: async () => {
-      try {
+        if (filters && filters.length > 0) {
+          const filteredTodos = await Todo.find({ filters });
+          return filteredTodos;
+        }
         const todos = await Todo.find();
+        if (!todos) { 
+          return null;
+        }
         return todos;
       } catch (error) {
         throw new Error('Error fetching todos');
@@ -23,12 +22,24 @@ export const resolvers = {
     },
   },
   Mutation: {
-    createTodo: async (_: unknown, { task }: { task: string }) => {
+    createTodo: async (
+      _: ITodo,
+      {
+        task,
+        completed,
+        completedTime,
+        createdAt,
+        filters,
+      }: { task: string; completed: boolean; completedTime: Date; createdAt: Date; filters: string[] },
+    ) => {
+      console.log('task', task);
       try {
         const newTodo = new Todo({
           task,
-          completed: false,
-          creationTime: new Date(),
+          completed,
+          completedTime,
+          createdAt,
+          filters,
         });
         const savedTodo = await newTodo.save();
         return savedTodo;

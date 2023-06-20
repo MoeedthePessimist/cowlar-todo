@@ -1,0 +1,28 @@
+{
+  "dummyTodos": [
+    {
+      "_id": 1,
+      "task": "Learn React",
+      "completed": false,
+      "completedTime": null,
+      "createdAt": "2018-10-01T12:00:00.000Z",
+      "filters": ["personal", "urgent"]
+    },
+    {
+      "_id": 2,
+      "task": "Learn Angular",
+      "completed": false,
+      "completedTime": null,
+      "createdAt": "2018-10-01T12:00:00.000Z",
+      "filters": ["personal"]
+    },
+    {
+      "_id": 3,
+      "task": "Learn Vue",
+      "completed": false,
+      "completedTime": null,
+      "createdAt": "2018-10-01T12:00:00.000Z",
+      "filters": ["personal", "work"]
+    }
+  ]
+}

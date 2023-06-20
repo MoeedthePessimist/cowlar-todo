@@ -19,6 +19,12 @@ const TodoSchema: Schema<ITodo> = new Schema({
     type: Date,
     default: Date.now,
   },
+  filters: [
+    {
+      type: String,
+      default: '',
+    },
+  ],
 });
 
 const TodoModel = model<ITodo>('Todo', TodoSchema);

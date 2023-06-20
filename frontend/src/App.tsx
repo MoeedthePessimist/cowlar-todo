@@ -7,7 +7,7 @@ import SideBar from './components/side-bar/side-bar';
 import TodoPage from './pages/todo-page/todo-page';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:3000/graphql', // Update the URL to your GraphQL server
+  uri: 'http://localhost:8080/graphql', // Update the URL to your GraphQL server
   cache: new InMemoryCache(),
 });
 
@@ -19,7 +19,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <div className="App">
-        <SideBar onPressOption={handleOptionPress} />
+        <SideBar onPressFilter={handleOptionPress} />
         <TodoPage />
       </div>
     </ApolloProvider>
