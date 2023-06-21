@@ -1,3 +1,5 @@
+// import { ENV_BACKEND_URL } from '~/config';
+
 export const colors: Record<string, string> = {
   personal: '#fc99ae',
   work: '#3fd4f4',
@@ -14,4 +16,4 @@ export const filters: {
   urgent: 'urgent',
 };
 
-export const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+export const BACKEND_URL = 'http://localhost:8080/';

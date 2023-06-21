@@ -3,8 +3,9 @@
     "target": "ES2020",
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
+    "module": "es2022",
     "skipLibCheck": true,
+    "esModuleInterop": true,
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -25,6 +26,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "vite.config.ts", "tsconfig.node.json", "@types"],
+  "include": ["src", "vite.config.ts", "tsconfig.node.json", "@types/index.d.ts", "jest.config.cjs"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

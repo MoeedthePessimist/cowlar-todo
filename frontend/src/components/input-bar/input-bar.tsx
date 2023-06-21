@@ -1,11 +1,12 @@
 import React from 'react';
 
 import styles from './styles.module.scss';
-import { Filter } from '../side-bar/side-bar';
+
+import { Filter } from '~/components/side-bar/side-bar';
 
 import { filters } from '~/constants';
 
-import { ReactComponent as Icon } from '~/assets/icon.svg';
+import { ReactComponent as SendIcon } from '~/assets/icon.svg';
 import { ReactComponent as CrossIcon } from '~/assets/cross_icon.svg';
 
 type InputBarProps = {
@@ -63,6 +64,7 @@ const InputBar: React.FC<InputBarProps> = ({
               type="text"
               placeholder="What is your next task"
               className={styles['input']}
+              data-testid="input"
               value={task}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTask(event.target.value)}
               onKeyPress={onPressEnter}
@@ -71,8 +73,8 @@ const InputBar: React.FC<InputBarProps> = ({
         </div>
 
         <div className={styles['control-container']}>
-          <button onClick={onPressAdd} className={styles['control']}>
-            <Icon width={30} height={30} />
+          <button onClick={onPressAdd} className={styles['control']} data-testid="add-button">
+            <SendIcon width={30} height={30} />
           </button>
         </div>
       </div>

@@ -62,7 +62,6 @@ const TodoPage: React.FC<TodoPageProps> = ({ searchFilters, onPressSearchFilters
       completedTime: todo.completed ? null : new Date(),
     };
 
-    // console.log(data);
     await updateTodo(data);
 
     populateData();

@@ -4,7 +4,7 @@ import styles from './styles.module.scss';
 
 import ErrorIllustration from '~/assets/error_illustration.png';
 
-type ErrorProps = {
+export type ErrorProps = {
   message: string;
 };
 

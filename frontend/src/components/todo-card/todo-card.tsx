@@ -47,13 +47,17 @@ const TodoCard: React.FC<TodoCardProps> = ({ todo, onPressComplete, onPressDelet
       <div className={styles['icons-container']}>
         <div className={styles['icon-container']}>
           {todo.completed ? (
-            <CheckIcon className={styles['icon']} width={20} height={20} onClick={() => onPressComplete(todo)} />
+            <div onClick={() => onPressComplete(todo)} data-testid="uncheck-icon">
+              <CheckIcon className={styles['icon']} width={20} height={20} />
+            </div>
           ) : (
-            <UncheckIcon className={styles['icon']} width={20} height={20} onClick={() => onPressComplete(todo)} />
+            <div onClick={() => onPressComplete(todo)} data-testid="check-icon">
+              <UncheckIcon className={styles['icon']} width={20} height={20} />
+            </div>
           )}
         </div>
-        <div className={styles['icon-container']}>
-          <BinIcon className={styles['icon']} width={20} height={20} onClick={() => onPressDelete(todo._id)} />
+        <div className={styles['icon-container']} onClick={() => onPressDelete(todo._id)} data-testid="bin-icon">
+          <BinIcon className={styles['icon']} width={20} height={20} />
         </div>
       </div>
     </div>
