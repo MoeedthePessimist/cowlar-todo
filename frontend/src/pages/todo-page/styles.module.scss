@@ -21,6 +21,42 @@
   gap: 1rem;
 }
 
+.filters-container {
+  display: flex;
+  width: 100%;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.filters-content {
+  gap: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.filter-preview {
+  background: $color-secondary;
+  color: $color-text-secondary;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 200px;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.cross-icon:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+.form-error {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
+
 @media screen and (min-width: 600px) {
   .container {
     padding: 0 2rem;

@@ -1,0 +1,56 @@
+@import '../../index.scss';
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.loading-spinners {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  animation: bounce 1.5s infinite;
+}
+
+.loading-spinner:nth-child(1) {
+  background-color: $color-work;
+  animation-delay: 0s;
+}
+
+.loading-spinner:nth-child(2) {
+  background-color: $color-personal;
+  animation-delay: 0.5s;
+}
+
+.loading-spinner:nth-child(3) {
+  background-color: $color-urgent;
+  animation-delay: 1s;
+}
+
+.loading-message {
+  color: $color-text-primary;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-left: 1rem;
+}
+
+/* Animation keyframes */
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}

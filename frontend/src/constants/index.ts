@@ -13,3 +13,5 @@ export const filters: {
   work: 'work',
   urgent: 'urgent',
 };
+
+export const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;

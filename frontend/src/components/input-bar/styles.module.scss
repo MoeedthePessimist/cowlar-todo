@@ -1,10 +1,18 @@
 @import '../../index.scss';
-.container {
+
+.main {
   display: flex;
+  flex-direction: column;
+  gap: 1rem;
   background: $color-secondary;
   padding: 0.5rem 2rem;
   border-radius: 1rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  display: flex;
+
   flex-direction: column;
 }
 
@@ -16,7 +24,7 @@
   // height: 100%;
 }
 
-.filter-container {
+.filters-container {
   display: flex;
   gap: 0.5rem;
   flex: 0.07;
@@ -55,6 +63,30 @@
 }
 
 .control:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.selected-filters-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  color: $color-text-secondary;
+  border: 1px solid $color-text-secondary;
+  font-weight: 500;
+}
+
+.icon:hover {
   cursor: pointer;
   transform: scale(1.1);
 }

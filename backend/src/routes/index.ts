@@ -6,4 +6,4 @@ const router: Router = Router();
 
 router.use('/todos', todoRouter);
 
-export default Router;
+export default router;

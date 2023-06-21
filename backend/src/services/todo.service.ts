@@ -1,52 +1,28 @@
 import TodoModel from '~/models/todo.model';
+import { ITodo } from '~/types';
 
-class TodoService {
-  public async getTodos(filters: unknown): Promise<(typeof TodoModel)[]> {
-    return await TodoModel.find(filters);
-  }
-
-  public async addTodo(
-    task: string,
-    completed: boolean,
-    completedTime: Date,
-    createdAt: Date,
-    filters: string[],
-  ): Promise<typeof TodoModel | unknown> {
-    const newTodo = new TodoModel({
-      task,
-      completed,
-      completedTime,
-      createdAt,
-      filters,
-    });
-
-    return await newTodo.save();
-  }
-
-  public async updateTodo(
-    _id: string,
-    task: string,
-    completed: boolean,
-    completedTime: Date,
-    createdAt: Date,
-    filters: string[],
-  ): Promise<typeof TodoModel | null> {
-    return await TodoModel.findByIdAndUpdate(
-      _id,
-      {
-        task,
-        completed,
-        completedTime,
-        createdAt,
-        filters,
-      },
-      { new: true },
-    );
-  }
-
-  public async deleteTodo(_id: string): Promise<typeof TodoModel | null> {
-    return await TodoModel.findByIdAndDelete(_id);
-  }
+export async function getTodos(filters: unknown): Promise<ITodo[]> {
+  return await TodoModel.find(filters);
 }
 
-export default TodoService;
+export async function addTodo(task: string, completed: boolean, filters: string[]): Promise<ITodo> {
+  const newTodo = new TodoModel({
+    task,
+    completed,
+    filters,
+  });
+
+  return await newTodo.save();
+}
+
+export async function updateTodo(_id: string, data: unknown): Promise<ITodo | null> {
+  return await TodoModel.findByIdAndUpdate(_id, { $set: data }, { new: true });
+}
+
+export async function deleteTodo(_id: string): Promise<ITodo | null> {
+  return await TodoModel.findByIdAndDelete(_id);
+}
+
+export async function filterTodos(filters: string[]): Promise<ITodo[]> {
+  return await TodoModel.find({ filters: { $in: filters } });
+}

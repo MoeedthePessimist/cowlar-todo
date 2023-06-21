@@ -40,6 +40,13 @@
   transform: scale(1.1);
 }
 
+.completion {
+  color: $color-text-secondary;
+  font-size: 0.8em;
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
 @media screen and (min-width: 600px) {
   .container {
     flex-direction: row;
