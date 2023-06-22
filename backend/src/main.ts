@@ -2,7 +2,7 @@ import { Express } from 'express';
 
 import { createApp, connectToDatabase, createServer } from '~/configs';
 
-const server: Express = createApp();
+export const server: Express = createApp();
 
 connectToDatabase();
 

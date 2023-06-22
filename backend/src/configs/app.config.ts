@@ -1,6 +1,6 @@
 import cors from 'cors';
 
-import express, { Application } from 'express';
+import express, { Application, NextFunction, Request, Response } from 'express';
 
 import apiRoutes from '~/routes';
 
@@ -23,7 +23,7 @@ export const appConfig = {
 const corsConfig: CorsConfig = {
   origin: '*',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  allowedHeaders: [ 'Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization', 'X-Access-Token' ],
+  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization', 'X-Access-Token'],
 };
 
 export const createApp = () => {
@@ -36,4 +36,9 @@ export const createApp = () => {
   server.use('/api', apiRoutes);
 
   return server;
+};
+
+export const setResponseHeader = (req: Request, res: Response, next: NextFunction) => {
+  res.setHeader('Content-Type', 'application/json');
+  next();
 };
