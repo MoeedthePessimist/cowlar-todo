@@ -35,6 +35,8 @@ describe('GET /api/todos', () => {
   });
 });
 
+let createdId;
+
 describe('POST /api/todos', () => {
   it('should create a new todo', async () => {
     const res = await request(server)
@@ -42,8 +44,9 @@ describe('POST /api/todos', () => {
       .send({
         task: 'This is a test task',
         completed: false,
-        filters: ['urgent'],
+        filters: [ 'urgent' ],
       });
+    createdId = res.body.data._id;
     expect(res.statusCode).toBe(201);
     expect(res.body.success).toBe(true);
     expect(res.body.data.task).toBe('This is a test task');
@@ -52,7 +55,7 @@ describe('POST /api/todos', () => {
 
 describe('PATCH /api/todos/:id', () => {
   it('should update a todo', async () => {
-    const res = await request(server).patch('/api/todos/6493dadea454a72dd1c2745e').send({
+    const res = await request(server).patch(`/api/todos/${createdId}`).send({
       completed: true,
       completedTime: new Date(),
     });
@@ -65,10 +68,10 @@ describe('PATCH /api/todos/:id', () => {
 
 describe('DELETE /api/todos/:id', () => {
   it('should delete a todo', async () => {
-    const res = await request(server).delete('/api/todos/6493dd526003f06a37b13000');
+    const res = await request(server).delete(`/api/todos/${createdId}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.success).toBe(true);
     expect(res.body.data.task).toBe('This is a test task');
-    expect(res.body.data.completed).toBe(false);
+    expect(res.body.data.completed).toBe(true);
   });
 });
