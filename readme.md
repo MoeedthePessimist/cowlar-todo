@@ -33,3 +33,20 @@ yarn lint
 # Run lint fix
 
 yarn lint:fix
+
+<!-- Technology stack -->
+
+## Technology stack
+
+- [React](https://reactjs.org/)
+- [Typescript](https://www.typescriptlang.org/)
+- [mongodb](https://www.mongodb.com/)
+- [Express](https://expressjs.com/)
+- [Node.js](https://nodejs.org/en/)
+- [docker](https://www.docker.com/)
+- [docker-compose](https://docs.docker.com/compose/)
+- [jest](https://jestjs.io/)
+- [supertest](https://www.npmjs.com/package/supertest)
+- [eslint](https://eslint.org/)
+- [testing-library](https://testing-library.com/docs/)
+- [prettier](https://prettier.io/)
