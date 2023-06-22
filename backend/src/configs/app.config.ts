@@ -25,25 +25,30 @@ export const appConfig = {
 const corsConfig: CorsConfig = {
   origin: '*',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization', 'X-Access-Token'],
+  allowedHeaders: [ 'Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization', 'X-Access-Token' ],
 };
 
 export const createApp = () => {
   const server = express();
 
-  server.use(appConfig.cors(corsConfig));
-  appConfig.json(server);
-  appConfig.urlencoded(server);
+  try {
+    server.use(appConfig.cors(corsConfig));
+    appConfig.json(server);
+    appConfig.urlencoded(server);
 
-  // serve the react app files from the dist folder
-  server.use(express.static(path.join(__dirname, '..', '..', 'dist')));
+    // serve the react app files from the dist folder
+    server.use(express.static(path.join(__dirname, '..', '..', 'dist')));
 
-  server.use('/api', apiRoutes);
+    server.use('/api', apiRoutes);
 
-  //   serve the index.html from the dist folder
-  server.get('*', (req: Request, res: Response) => {
-    res.sendFile(path.join(__dirname, '..', '..', 'dist', 'index.html'));
-  });
+    // serve the index.html from the dist folder
+    server.get('*', (req: Request, res: Response) => {
+      res.sendFile(path.join(__dirname, '..', '..', 'dist', 'index.html'));
+    });
+  } catch (error) {
+    // Handle any errors that occur during server setup
+    console.error('Error setting up the server:', error);
+  }
 
   return server;
 };
