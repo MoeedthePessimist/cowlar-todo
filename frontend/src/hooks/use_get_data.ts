@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { APIResponse, ITodo } from '~/types';
 
 export const useGetData = () => {
-  const [ data, setData ] = useState<ITodo[]>([]);
-  const [ loading, setLoading ] = useState<boolean>(false);
-  const [ error, setError ] = useState<string>('');
+  const [data, setData] = useState<ITodo[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
 
   const getData = async (responseData: Promise<APIResponse<ITodo[]>>) => {
     setLoading(true);
@@ -39,5 +39,5 @@ export const useGetData = () => {
     }
   };
 
-  return { data, loading, error, getData };
+  return { data, loading, error, getData, setError };
 };

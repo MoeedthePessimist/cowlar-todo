@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 
 import styles from './styles.module.scss';
@@ -12,6 +13,8 @@ import { Filter } from '~/components/side-bar/side-bar';
 import { ReactComponent as CrossIcon } from '~/assets/cross_icon.svg';
 import Loader from '~/components/loader/loader';
 import Error from '~/components/error/error';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 type TodoPageProps = {
   searchFilters: string[];
@@ -23,7 +26,9 @@ const TodoPage: React.FC<TodoPageProps> = ({ searchFilters, onPressSearchFilters
   const [ filters, setFilters ] = useState<string[]>([]);
   const [ formError, setFormError ] = useState<boolean>(false);
 
-  const { data: todos, loading, error, getData } = useGetData();
+  const [ isLoading, setIsLoading ] = useState<boolean>(false);
+
+  const { data: todos, loading, error, getData, setError } = useGetData();
 
   const populateData = () => {
     getData(getTodos(searchFilters));
@@ -32,6 +37,31 @@ const TodoPage: React.FC<TodoPageProps> = ({ searchFilters, onPressSearchFilters
   useEffect(() => {
     populateData();
   }, [ searchFilters ]);
+
+  const showToast = (type: 'success' | 'error' | 'warning' | 'info' | 'dark', message: string) => {
+    toast[type](message, {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+    });
+  };
+
+  useEffect(() => {
+    if (error) {
+      showToast('error', error);
+    }
+  }, [ error ]);
+
+  // useEffect(() => {
+  //   if (isLoading) {
+  //     showToast('info', 'Loading ....');
+  //   }
+  // }, [ isLoading ]);
 
   const handlePressAdd = async () => {
     if (task === '' || filters.length === 0) {
@@ -47,12 +77,23 @@ const TodoPage: React.FC<TodoPageProps> = ({ searchFilters, onPressSearchFilters
       filters: filters,
     };
 
-    await createTodo(todo);
+    try {
+      // setIsLoading(true);
+      await createTodo(todo);
 
-    setTask('');
-    setFilters([]);
+      setTask('');
+      setFilters([]);
 
-    populateData();
+      showToast('success', 'Todo added successfully');
+
+      populateData();
+    } catch (err: any) {
+      console.error(err);
+      setError(err.message);
+    }
+    // finally {
+    //   setIsLoading(false);
+    // }
   };
 
   const handlePressComplete = async (todo: ITodo) => {
@@ -62,15 +103,37 @@ const TodoPage: React.FC<TodoPageProps> = ({ searchFilters, onPressSearchFilters
       completedTime: todo.completed ? null : new Date(),
     };
 
-    await updateTodo(data);
+    try {
+      // setIsLoading(true);
+      await updateTodo(data);
 
-    populateData();
+      showToast('success', 'Todo updated successfully');
+
+      populateData();
+    } catch (err: any) {
+      console.error(err);
+      setError(err.message);
+    }
+    // finally {
+    //   setIsLoading(false);
+    // }
   };
 
   const handlePressDelete = async (_id: string | null | undefined) => {
-    await deleteTodo(_id);
+    try {
+      // setIsLoading(true);
+      await deleteTodo(_id);
 
-    populateData();
+      showToast('success', 'Todo deleted successfully');
+
+      populateData();
+    } catch (err: any) {
+      console.error(err);
+      setError(err.message);
+    }
+    // finally {
+    //   setIsLoading(false);
+    // }
   };
 
   const handlePressFilter = (filter: string) => {
@@ -90,6 +153,7 @@ const TodoPage: React.FC<TodoPageProps> = ({ searchFilters, onPressSearchFilters
 
   return (
     <div className={styles['container']}>
+      <ToastContainer />
       <div className={styles['input-container']}>
         <InputBar
           task={task}
