@@ -21,7 +21,7 @@ describe('SideBar', () => {
   it('calls onPressFilter when a filter button is clicked', () => {
     const onPressFilter = jest.fn();
     const { getByText } = render(<Filter onPressFilter={onPressFilter} filter="personal" />);
-    const filterButton = getByText('Personal');
+    const filterButton = getByText('personal');
     fireEvent.click(filterButton);
     expect(onPressFilter).toHaveBeenCalledWith('personal');
   });

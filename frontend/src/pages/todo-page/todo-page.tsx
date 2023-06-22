@@ -26,7 +26,7 @@ const TodoPage: React.FC<TodoPageProps> = ({ searchFilters, onPressSearchFilters
   const [ filters, setFilters ] = useState<string[]>([]);
   const [ formError, setFormError ] = useState<boolean>(false);
 
-  const [ isLoading, setIsLoading ] = useState<boolean>(false);
+  // const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { data: todos, loading, error, getData, setError } = useGetData();
 
