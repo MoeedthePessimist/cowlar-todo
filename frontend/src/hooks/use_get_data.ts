@@ -21,9 +21,19 @@ export const useGetData = () => {
       }
       setData(todos);
       setError('');
-    } catch (err) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
       console.error(err);
-      setError("Couldn't fetch todos");
+
+      if (err instanceof Error) {
+        setError(err.message);
+      }
+
+      if (typeof err === 'string') {
+        setError(err);
+      }
+
+      setData([]);
     } finally {
       setLoading(false);
     }

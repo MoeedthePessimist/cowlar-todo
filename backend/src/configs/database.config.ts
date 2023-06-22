@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 
 dotenv.config();
 
-export const MONGO_CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || '';
+export const MONGO_CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || 'http://localhost:27017/cowlar';
 
 export const connectToDatabase = () => {
   mongoose.connect(MONGO_CONNECTION_STRING);

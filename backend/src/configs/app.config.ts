@@ -2,6 +2,8 @@ import cors from 'cors';
 
 import express, { Application, NextFunction, Request, Response } from 'express';
 
+import path from 'path';
+
 import apiRoutes from '~/routes';
 
 type CorsConfig = {
@@ -33,7 +35,15 @@ export const createApp = () => {
   appConfig.json(server);
   appConfig.urlencoded(server);
 
+  // serve the react app files from the dist folder
+  server.use(express.static(path.join(__dirname, '..', '..', 'dist')));
+
   server.use('/api', apiRoutes);
+
+  //   serve the index.html from the dist folder
+  server.get('*', (req: Request, res: Response) => {
+    res.sendFile(path.join(__dirname, '..', '..', 'dist', 'index.html'));
+  });
 
   return server;
 };

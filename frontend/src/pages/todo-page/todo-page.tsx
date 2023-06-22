@@ -136,7 +136,7 @@ const TodoPage: React.FC<TodoPageProps> = ({ searchFilters, onPressSearchFilters
 
       {loading && <Loader message="Loading Todos...." />}
 
-      {error && <Error message="Error loading todos" />}
+      {error && <Error message={error} />}
 
       <div className={styles['todos-container']}>
         {todos.map((todo: ITodo, index: number) => (

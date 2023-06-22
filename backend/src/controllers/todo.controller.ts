@@ -20,7 +20,7 @@ class TodoController {
 
       const todos: ITodo[] = await getTodos(req.query);
 
-      if (!todos.length) {
+      if (todos.length === 0) {
         return res.status(404).json({
           success: false,
           data: null,

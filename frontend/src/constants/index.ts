@@ -1,4 +1,4 @@
-// import { ENV_BACKEND_URL } from '~/config';
+import { ENV_BACKEND_URL, ENV_WORKING_ENVIRONMENT } from '~/config';
 
 export const colors: Record<string, string> = {
   personal: '#fc99ae',
@@ -16,4 +16,4 @@ export const filters: {
   urgent: 'urgent',
 };
 
-export const BACKEND_URL = 'http://localhost:8080/';
+export const BACKEND_URL = ENV_WORKING_ENVIRONMENT === 'development' ? ENV_BACKEND_URL : '';
