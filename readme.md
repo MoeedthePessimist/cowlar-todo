@@ -25,3 +25,11 @@ yarn test:frontend
 # Run backend tests
 
 yarn test:backend
+
+# Run lint
+
+yarn lint
+
+# Run lint fix
+
+yarn lint:fix
