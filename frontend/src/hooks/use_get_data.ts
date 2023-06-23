@@ -25,12 +25,14 @@ export const useGetData = () => {
     } catch (err: any) {
       console.error(err);
 
-      if (err instanceof Error) {
+      if ('response' in err) {
+        setError(err.response.data.error);
+      } else if (err instanceof Error) {
         setError(err.message);
-      }
-
-      if (typeof err === 'string') {
+      } else if (typeof err === 'string') {
         setError(err);
+      } else {
+        setError('Something went wrong');
       }
 
       setData([]);
