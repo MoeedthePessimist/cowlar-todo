@@ -11,6 +11,15 @@ class TodoController {
 
       if (filters) {
         const todos: ITodo[] = await filterTodos(filters as string[]);
+
+        if (todos.length === 0) {
+          return res.status(404).json({
+            success: false,
+            data: null,
+            error: 'No todos found with selected filters',
+          });
+        }
+
         return res.status(200).json({
           success: true,
           data: todos,

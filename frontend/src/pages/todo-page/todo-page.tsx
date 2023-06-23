@@ -26,7 +26,7 @@ const TodoPage: React.FC<TodoPageProps> = ({ searchFilters, onPressSearchFilters
   const [ filters, setFilters ] = useState<string[]>([]);
   const [ formError, setFormError ] = useState<boolean>(false);
 
-  // const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [ isLoading, setIsLoading ] = useState<boolean>(false);
 
   const { data: todos, loading, error, getData, setError } = useGetData();
 
@@ -57,11 +57,11 @@ const TodoPage: React.FC<TodoPageProps> = ({ searchFilters, onPressSearchFilters
     }
   }, [ error ]);
 
-  // useEffect(() => {
-  //   if (isLoading) {
-  //     showToast('info', 'Loading ....');
-  //   }
-  // }, [ isLoading ]);
+  useEffect(() => {
+    if (isLoading) {
+      showToast('info', 'Loading ....');
+    }
+  }, [ isLoading ]);
 
   const handlePressAdd = async () => {
     if (task === '' || filters.length === 0) {
@@ -78,7 +78,7 @@ const TodoPage: React.FC<TodoPageProps> = ({ searchFilters, onPressSearchFilters
     };
 
     try {
-      // setIsLoading(true);
+      setIsLoading(true);
       await createTodo(todo);
 
       setTask('');
@@ -90,10 +90,9 @@ const TodoPage: React.FC<TodoPageProps> = ({ searchFilters, onPressSearchFilters
     } catch (err: any) {
       console.error(err);
       setError(err.message);
+    } finally {
+      setIsLoading(false);
     }
-    // finally {
-    //   setIsLoading(false);
-    // }
   };
 
   const handlePressComplete = async (todo: ITodo) => {
@@ -104,7 +103,7 @@ const TodoPage: React.FC<TodoPageProps> = ({ searchFilters, onPressSearchFilters
     };
 
     try {
-      // setIsLoading(true);
+      setIsLoading(true);
       await updateTodo(data);
 
       showToast('success', 'Todo updated successfully');
@@ -113,15 +112,14 @@ const TodoPage: React.FC<TodoPageProps> = ({ searchFilters, onPressSearchFilters
     } catch (err: any) {
       console.error(err);
       setError(err.message);
+    } finally {
+      setIsLoading(false);
     }
-    // finally {
-    //   setIsLoading(false);
-    // }
   };
 
   const handlePressDelete = async (_id: string | null | undefined) => {
     try {
-      // setIsLoading(true);
+      setIsLoading(true);
       await deleteTodo(_id);
 
       showToast('success', 'Todo deleted successfully');
@@ -130,10 +128,9 @@ const TodoPage: React.FC<TodoPageProps> = ({ searchFilters, onPressSearchFilters
     } catch (err: any) {
       console.error(err);
       setError(err.message);
+    } finally {
+      setIsLoading(false);
     }
-    // finally {
-    //   setIsLoading(false);
-    // }
   };
 
   const handlePressFilter = (filter: string) => {
@@ -144,7 +141,6 @@ const TodoPage: React.FC<TodoPageProps> = ({ searchFilters, onPressSearchFilters
     }
   };
 
-  // on press enter
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       handlePressAdd();
